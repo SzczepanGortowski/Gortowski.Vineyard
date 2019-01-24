@@ -1,0 +1,127 @@
+﻿<Window x:Class="Gortowski.Vineyard.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gortowski.Vineyard.UI"
+        mc:Ignorable="d"
+        Title="Vineyard" Height="450" Width="800">
+    <Grid >
+
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="5" MaxHeight="8"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition MinHeight="5" MaxHeight="8"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition MinHeight="5" MaxHeight="8"></RowDefinition>
+            <RowDefinition MinHeight="30" MaxHeight="40"></RowDefinition>
+            <RowDefinition MinHeight="5" MaxHeight="8"></RowDefinition>
+            <RowDefinition MinHeight="30" MaxHeight="40"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="RoyalBlue"></Grid>
+
+        <Grid Grid.Row="1" Background="SkyBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid  Grid.Column="1" VerticalAlignment="Stretch">
+                <Label Width="280" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" FontFamily="Century Gothic" FontWeight="UltraBold" FontStyle="Italic">Katalog z winami</Label>
+            </Grid>
+            <Grid Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Right">
+                <Image Width="90" Height="70" Source="../Img/Grape.bmp"  HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+            </Grid>
+
+
+        </Grid>
+
+
+        <Grid Grid.Row="2" Background="RoyalBlue"></Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition MinHeight="30" MaxHeight="30"></RowDefinition>
+                    <RowDefinition MinHeight="10" MaxHeight="40"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" >
+                    <Label Width="85" Height="26" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontFamily="Century Gothic" Margin="0,-2,0,-3">Region</Label>
+                    <ComboBox Name="cmbBox" Width="176" IsEditable="True" SelectedValuePath="Name"   Text="Wybierz Region"
+                          DisplayMemberPath="Name"
+                          ItemsSource="{Binding Regions, Mode=TwoWay}" SelectedItem="{Binding SelectedRegion}">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" >
+                    <Button Width="77" Height="25" Margin="15 3 5 3" Command="{Binding OpenRegionCommand}">Nowy</Button>
+                    <Button Width="77" Height="25" Margin="15,3,5,0" Command="{Binding DeleteRegionCommand}"  VerticalAlignment="Top" >Usuń</Button>
+                    <Button Width="77" Height="25" Margin="15 3 5 3" Command="{Binding EditRegionCommand}">Edytuj</Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23*"></RowDefinition>
+                    <RowDefinition Height="57*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="198,5" Grid.RowSpan="2" />
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="4" Background="RoyalBlue"></Grid>
+        <Grid Grid.Row="5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5" >
+                <Button Width="70" Margin="5" Command="{Binding OpenVineCommand}">Dodaj</Button>
+                <Button Width="70" Margin="5" Command="{Binding EditVineCommand}">Edytuj</Button>
+                <Button Width="70" Margin="5" Command="{Binding DeleteVineCommand}" Content="Usuń"/>
+            </StackPanel>
+        </Grid>
+        <Grid  Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1.2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Margin="5" Content="R. Winogrona" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+            <ComboBox Grid.Column="1" MinWidth="100" Margin="0 10" ItemsSource="{Binding GrapeTypes}"
+                      SelectedItem="{Binding SelectedGrype}"
+                      ></ComboBox>
+            <Label Margin="5" Content="Typ Wina" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+            <TextBox Grid.Column="3" MinWidth="160" Margin="0 10" Text="{Binding NameVine ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+            <Label Margin="5" Content="Typ wina" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
+            <ComboBox Grid.Column="5" MinWidth="100" Margin="0 10 10 10" ItemsSource="{Binding VineTypes}"
+                      SelectedItem="{Binding SelectedVineType}"
+                      ></ComboBox>
+        </Grid>
+           
+
+
+        <DockPanel Grid.Row="8" Margin="5 0 5 5">
+            <DataGrid ItemsSource="{Binding Vines}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                      IsReadOnly="True" SelectedItem="{Binding SelectedVine}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Rodzaj Winogrona" Binding="{Binding GrapeType}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Typ Wina" Binding="{Binding VineType}" Width="*"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Region" Binding="{Binding Region.Name}" Width="*"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+
+
+
+    </Grid>
+
+</Window>
+

@@ -1,0 +1,41 @@
+﻿<Window x:Class="Gortowski.Vineyard.UI.Views.VineView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gortowski.Vineyard.UI.Views"
+        mc:Ignorable="d"
+        Title="VineView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Content="Zapisz" Grid.Column="1" HorizontalAlignment="Left" Margin="73,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75"
+                Command="{Binding SaveCommand}"/>
+        <Label Content="Nazwa" HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Typ Winogrona" HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Content="Typ Wina" HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="3" VerticalAlignment="Top"/>
+        <Label Content="Region" HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="4" VerticalAlignment="Top"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="28,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Vine.Name}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.033,0.696"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="28,15,0,0" Grid.Row="2" VerticalAlignment="Top" Width="120"
+                  ItemsSource="{Binding GrapeTypes}"  SelectedItem="{Binding Vine.GrapeType}"
+                  />
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="28,15,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120"
+                  ItemsSource="{Binding VineTypes}" SelectedItem="{Binding Vine.VineType}"
+                  />
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="28,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120"
+                  SelectedValuePath="Name"  DisplayMemberPath="Name"
+                  ItemsSource="{Binding Regions}" SelectedItem="{Binding Vine.Region}"/>
+    </Grid>
+</Window>
